@@ -1,0 +1,6 @@
+{
+  "name": "FocusTime",
+  "description": "Screen time tracking app with weekly usage summaries, app limits, study hour focus sessions, notification blocking, and social media app lock.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
