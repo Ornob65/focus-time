@@ -12,6 +12,7 @@ import android.os.IBinder
 import androidx.core.app.NotificationCompat
 import com.example.FocusApp
 import com.example.MainActivity
+import com.example.data.local.AppDatabase
 import com.example.data.repository.ScreenTimeRepository
 import com.example.ui.lock.LockShieldActivity
 import kotlinx.coroutines.CoroutineScope
@@ -33,7 +34,7 @@ class FocusLockService : Service() {
 
     override fun onCreate() {
         super.onCreate()
-        repository = ScreenTimeRepository(applicationContext, FocusApp.instance.database)
+        repository = ScreenTimeRepository(applicationContext, AppDatabase.getInstance(applicationContext))
     }
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {

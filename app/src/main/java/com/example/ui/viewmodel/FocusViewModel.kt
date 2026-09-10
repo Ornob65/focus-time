@@ -7,6 +7,7 @@ import android.provider.Settings
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.FocusApp
+import com.example.data.local.AppDatabase
 import com.example.data.local.entity.AppLimitEntity
 import com.example.data.local.entity.BlockedNotificationEntity
 import com.example.data.model.AppCategory
@@ -31,7 +32,7 @@ class FocusViewModel(application: Application) : AndroidViewModel(application) {
 
     private val repository = ScreenTimeRepository(
         application.applicationContext,
-        FocusApp.instance.database
+        AppDatabase.getInstance(application.applicationContext)
     )
 
     val allLimits: StateFlow<List<AppLimitEntity>> = repository.allLimits

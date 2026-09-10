@@ -26,4 +26,22 @@ abstract class AppDatabase : RoomDatabase() {
     abstract fun studyScheduleDao(): StudyScheduleDao
     abstract fun blockedNotificationDao(): BlockedNotificationDao
     abstract fun focusHistoryDao(): FocusHistoryDao
+
+    companion object {
+        @Volatile
+        private var INSTANCE: AppDatabase? = null
+
+        fun getInstance(context: android.content.Context): AppDatabase {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE ?: androidx.room.Room.databaseBuilder(
+                    context.applicationContext,
+                    AppDatabase::class.java,
+                    "focus_screentime.db"
+                )
+                .fallbackToDestructiveMigration()
+                .build()
+                .also { INSTANCE = it }
+            }
+        }
+    }
 }

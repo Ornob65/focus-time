@@ -9,19 +9,16 @@ import com.example.data.local.AppDatabase
 
 class FocusApp : Application() {
 
-    lateinit var database: AppDatabase
-        private set
+    val database: AppDatabase by lazy {
+        AppDatabase.getInstance(this)
+    }
 
     override fun onCreate() {
         super.onCreate()
         instance = this
 
-        database = Room.databaseBuilder(
-            applicationContext,
-            AppDatabase::class.java,
-            "focus_screentime.db"
-        ).fallbackToDestructiveMigration().build()
-
+        // Initialize database and channels
+        val db = database
         createNotificationChannels()
     }
 

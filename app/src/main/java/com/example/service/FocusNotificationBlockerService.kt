@@ -4,6 +4,7 @@ import android.content.pm.PackageManager
 import android.service.notification.NotificationListenerService
 import android.service.notification.StatusBarNotification
 import com.example.FocusApp
+import com.example.data.local.AppDatabase
 import com.example.data.repository.ScreenTimeRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,7 +18,7 @@ class FocusNotificationBlockerService : NotificationListenerService() {
 
     override fun onCreate() {
         super.onCreate()
-        repository = ScreenTimeRepository(applicationContext, FocusApp.instance.database)
+        repository = ScreenTimeRepository(applicationContext, AppDatabase.getInstance(applicationContext))
     }
 
     override fun onNotificationPosted(sbn: StatusBarNotification?) {
